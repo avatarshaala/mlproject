@@ -16,11 +16,19 @@ def getpriors(targets):
 
 def getlikelihood(instances, targets):
     likelihoods = {}
+    if len(instances) != len(targets):
+        print("error: class and features are of unequal lengths")
+        return
+    i = 0
+    for instance in instances:
+        conditional = instance + " | " + targets[i]
+        if conditional in likelihoods:
+            pass
 
 
+def train(instances, target):
 
 
-def train(instances, targets, alpha, iterations, initial_weights=[], stop_after_convergence=True):
 
     pass
 
