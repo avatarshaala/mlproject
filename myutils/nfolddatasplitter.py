@@ -6,7 +6,7 @@ __author__ = 'Dipesh Gautam' \
  56 data points
         10 folds
         each fold contains 5 data points in general
-        but 56 % 10 = 6
+        but 56 % 10 = 6 therefore the extra 6 data points are distributed among the folds
           0   1   2   3 .............55   56
         |___|___|___|___|___|___|___|___|___|
 
@@ -20,31 +20,11 @@ __author__ = 'Dipesh Gautam' \
 
 '''
 
-'''
-for(int i = 0; i < numOfFolds; i++){
-            ArrayList<Integer> testIndices = new ArrayList<Integer>();
-            ArrayList<Integer> trainIndices = new ArrayList<Integer>();
-            this.crossValidationDataIndices[i] = new CrossValidationDataIndices();
-            int share = 0;
-            if(residue-- > 0) share = 1;
-            int testMin = i * (foldSize + share);
-            int testMax = testMin + (foldSize + share)-1;
-            for(int j = 0; j < dataSize; j++){
-                if(j >= testMin && j <= testMax)
-                    testIndices.add(j);
-                else
-                    trainIndices.add(j);
-            }
-
-            this.crossValidationDataIndices[i].testDataIndices = this.getArray(testIndices);
-            this.crossValidationDataIndices[i].trainDataIndices = this.getArray(trainIndices);
-        }
-'''
-
 def get_fold_indices(datalength, numoffolds):
 
     validationlist = []
     foldlength = int(datalength / numoffolds)
+    #each fold gets one more data point until residue is zero
     residue = datalength % numoffolds
     allindices = set([i for i in range(0,datalength)])
     for i in range(0, numoffolds):
@@ -60,9 +40,8 @@ def get_fold_indices(datalength, numoffolds):
 
     return validationlist
 
-'''
+
 #test code below
 lst = get_fold_indices(56, 10)
 
 print(lst[8])
-'''
