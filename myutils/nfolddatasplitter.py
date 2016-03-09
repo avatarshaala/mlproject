@@ -31,7 +31,7 @@ def get_fold_indices(datalength, numoffolds):
         share = 0
         if residue > 0:
             share = 1
-        residue -= 1
+            residue -= 1
         testmin = i * (foldlength + share)
         testmax = testmin + (foldlength + share) - 1
         testindices = [j for j in range(testmin,testmax + 1)]
@@ -44,5 +44,5 @@ def get_fold_indices(datalength, numoffolds):
 #test code below
 lst = get_fold_indices(56, 10)
 
-print(lst[8])
+print(lst[3])
 '''
