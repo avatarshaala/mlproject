@@ -40,8 +40,9 @@ def get_fold_indices(datalength, numoffolds):
 
     return validationlist
 
-
+'''
 #test code below
 lst = get_fold_indices(56, 10)
 
 print(lst[8])
+'''
