@@ -25,7 +25,7 @@ def train(instances, targets):
     i = 0
     #count the features given target by iterating through each instance
     for instance in instances:
-        features = instance.split(",")
+        features = instance.copy()
         j = 1
         #update class frequency table with the counts of each class
         updatefrequency(classcounts,targets[i])
@@ -43,7 +43,7 @@ def train(instances, targets):
 
 def getlikelihoods(classcounts, conditionalfeaturecount, instance):
 
-    features = instance.split(",")
+    features = instance.copy()
 
     #initialize likelihood for each class to 1
     likelihoods =  {label: 1 for label, count in classcounts.items()}
@@ -67,8 +67,11 @@ def test(traininginstancescount, classcounts,conditionalfeaturecounts, instance)
     n = traininginstancescount
     priors.update((x,y/n) for x, y in priors.items())
 
+    print(priors)
+    print(conditionalfeaturecounts)
     posteriors = getlikelihoods(classcounts, conditionalfeaturecounts, instance)
-
+    print(posteriors)
     posteriors.update((x,priors[x] * y) for x, y in posteriors.items())
+    print(posteriors)
     maxlabel = max(posteriors, key=lambda i: posteriors[i])
     return maxlabel, posteriors[maxlabel]
