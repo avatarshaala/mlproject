@@ -16,6 +16,8 @@ def main():
 
 	#read the instances and target output from training file
 	instances,targets = read_training_data(trainingfilename)
+	#convert targets to float
+	targets = [float(x) for x in targets]
 	#generate bias vector
 	bias = generate_bias_vector(len(instances))
 	#append biase term to each of the instances, hence dimension of an instance increase by 1

@@ -3,6 +3,9 @@ __author__ = 'Dipesh Gautam' \
              'email: dgautam@memphis.edu'
 '''---------------------------------------------------'''
 from algorithms.naivebayes import *
+
+from myutils.csvtrainingdatareader import read_training_data
+#from myutils.perceptroninputformatter import append_bias_vector
 def main():
 
     instances = [
@@ -15,7 +18,13 @@ def main():
     targets = [1,0,0,0,1]
     traininginstancescount, classcounts, conditionalfeaturecounts = train(instances,targets)
 
-    maxlabel, posterior =  test(traininginstancescount,classcounts,conditionalfeaturecounts,[1,1,0])
+    maxlabel, posterior =  test([1,1,0])
     print( maxlabel, posterior)
+
+
+    trainingfilename = "hw2-data/naivebayes.csv"
+    #read the instances and target output from training file
+    instances,targets = read_training_data(trainingfilename)
+    print(targets)
 
 if __name__ == "__main__":main()

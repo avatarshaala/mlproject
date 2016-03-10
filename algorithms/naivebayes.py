@@ -3,23 +3,64 @@ __author__ = 'Dipesh Gautam' \
 '''---------------------------------------------------'''
 from myutils.frequencytable import *
 
-def getpriors(targets):
-    priors = {}
-    for target in targets:
-        updatefrequency(priors, target)
-    n = len(targets)
-    priors.update((x,y/n) for x, y in priors.items())
+__classcounts__ = {}
+__conditionalfeaturecounts__ = {}#count of feature given the class
+__traininginstancescount__ = 0 # count of training data
+
+'''Function that returns priors of each class if default parameter is used else returns prior of a particular class'''
+def getpriors(label=None):
+
+    if label != None:
+        return {label:__classcounts__[label]/__traininginstancescount__}
+
+    priors = __classcounts__.copy()
+    priors.update((x,y/__traininginstancescount__) for x, y in priors.items())
 
     return priors
 
-'''This function calculates individual likelihood probabilities such as p(xi | ck) for each feature and class
-and stores in a dictionary
-'''
+'''Function that returns likelihood of the instance given the class or likelihood of the instance for all classes in default'''
+def getlikelihoods(instance, label = None):
+
+    features = instance.copy()
+    global __classcounts__
+    global __conditionalfeaturecounts__
+
+    '''define a local scope function to calculate likelihood of a given data instance with if given label'''
+    def likelihood(label,features, likelihoods):
+        j = 1
+        #do for each feature
+        for feature in features:
+
+            feature = "x{}={}".format(j,feature)
+            condition = feature + " | " + "y={}".format(label)
+            #multiply partial likelihood for each label with likelihood of feature for the label
+            likelihoods[label] *= __conditionalfeaturecounts__[condition]/__classcounts__[label]
+            #print("likelihood for ", label, likelihoods[label])
+            j += 1
+
+    '''--------------------------------'''
+
+    if label != None:
+        likelihoods = {label:1}
+        likelihood(label,features, likelihoods)
+        return likelihoods
+
+    #initialize likelihood for each class to 1
+    likelihoods =  {label: 1 for label, count in __classcounts__.items()}
+    #do for each label
+    for label, count in __classcounts__.items():
+        likelihood(label,features,likelihoods)
+
+    return likelihoods
+
 def train(instances, targets):
-    conditionalfeaturecounts = {} #count of feature given the class
-    classcounts = {} #frequency of each classes
-    traininginstancescount = len(targets)
-    if traininginstancescount != len(targets):
+
+    global __conditionalfeaturecounts__
+    global __classcounts__
+    global __traininginstancescount__
+    __traininginstancescount__ = len(instances)
+
+    if __traininginstancescount__ != len(targets):
         print("error: class and features are of unequal lengths")
         return
     i = 0
@@ -28,7 +69,7 @@ def train(instances, targets):
         features = instance.copy()
         j = 1
         #update class frequency table with the counts of each class
-        updatefrequency(classcounts,targets[i])
+        updatefrequency(__classcounts__,targets[i])
 
         #update counts of each feature given target (key is x1=some value | y = some value)
         for feature in features:
@@ -36,42 +77,22 @@ def train(instances, targets):
             j += 1
             condition = feature + " | " + "y={}".format(targets[i])
             #update the likelihood table with the condition counts of features
-            updatefrequency(conditionalfeaturecounts,condition)
+            updatefrequency(__conditionalfeaturecounts__,condition)
         i += 1
 
-    return traininginstancescount, classcounts, conditionalfeaturecounts
+    return __traininginstancescount__, __classcounts__, __conditionalfeaturecounts__
 
-def getlikelihoods(classcounts, conditionalfeaturecount, instance):
+'''returns pair of maximum likely class and its probability'''
+def test(instance):
 
-    features = instance.copy()
+    global __classcounts__
+    global __traininginstancescount__
 
-    #initialize likelihood for each class to 1
-    likelihoods =  {label: 1 for label, count in classcounts.items()}
-
-    #do for each label
-    for label, count in classcounts.items():
-
-        j = 1
-        #do for each feature
-        for feature in features:
-
-            feature = "x{}={}".format(j,feature)
-            condition = feature + " | " + "y={}".format(label)
-            #multiply partial likelihood for each label with likelihood of feature for the label
-            likelihoods[label] *= conditionalfeaturecount[condition]/classcounts[label]
-            j += 1
-    return likelihoods
-
-def test(traininginstancescount, classcounts,conditionalfeaturecounts, instance):
-    priors = classcounts.copy()
-    n = traininginstancescount
+    priors = __classcounts__.copy()
+    n = __traininginstancescount__
     priors.update((x,y/n) for x, y in priors.items())
-
-    print(priors)
-    print(conditionalfeaturecounts)
-    posteriors = getlikelihoods(classcounts, conditionalfeaturecounts, instance)
-    print(posteriors)
+    posteriors = getlikelihoods(instance)
     posteriors.update((x,priors[x] * y) for x, y in posteriors.items())
-    print(posteriors)
     maxlabel = max(posteriors, key=lambda i: posteriors[i])
+
     return maxlabel, posteriors[maxlabel]
