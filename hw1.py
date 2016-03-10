@@ -16,6 +16,7 @@ def main():
 
 	#read the instances and target output from training file
 	instances,targets = read_training_data(trainingfilename)
+	instances = [[float(x) for x in instance] for instance in instances]
 	#convert targets to float
 	targets = [float(x) for x in targets]
 	#generate bias vector

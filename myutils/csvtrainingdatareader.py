@@ -15,7 +15,7 @@ def read_training_data(filename):
 		input = line.strip().split(",")
 		instance = input[0:len(input)-1]
 		target_output = input[-1]
-		instances.append([float(x) for x in instance])
+		instances.append([x for x in instance])
 		#target_outputs.append(int(target_output))
 		target_outputs.append(target_output)
 	file.close()
