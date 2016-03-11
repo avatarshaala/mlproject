@@ -5,13 +5,15 @@ __author__ = 'Dipesh Gautam' \
 
 from random import shuffle
 from algorithms.naivebayes import *
-def do_nfolds_cross_validations(folds, model, instances,targets):
+'''current implementation of cross validation only handles categorical outputS'''
+def do_nfolds_cross_validations(model, folds, instances,targets):
 
     if len(instances) != len(targets):
         print("Error: Number of instances should be equal to number of targets")
         return
     foldslist = get_fold_indices(len(instances), folds, shuffled=True)
 
+    confusionmatrix = {}
     for fold in foldslist:
         testindices = fold[0]
         trainindices = fold[1]
@@ -23,6 +25,22 @@ def do_nfolds_cross_validations(folds, model, instances,targets):
         testtargets = [targets[i] for i in testindices]
 
         model.train(traininstances,traintargets)
+        #test each test instance
+        for i in range(len(testinstances)):
+            output = model.test(testinstances[i])
+
+            if type(output) != type(1) and type(output) != type(1.2):#if output is not integer or float (i.e output is tuple or array)
+                output = output[0]
+            #create confusion matrix
+            key = "{}:{}".format(testtargets[i],output)
+            if key in confusionmatrix:
+                confusionmatrix[key] +=1
+            else:
+                confusionmatrix[key] = 1
+
+    print(confusionmatrix)
+    return confusionmatrix
+
 
 
 '''

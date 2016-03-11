@@ -22,12 +22,12 @@ def main():
 	#convert targets to float
 	targets = [float(x) for x in targets]
 
-	pcptron = perceptron()
+	pcptron = perceptron(0.1,100,stop_after_convergence=True)
 	#generate bias vector
 	bias = pcptron.generate_bias_vector(len(instances))
 	#append biase term to each of the instances, hence dimension of an instance increase by 1
 	instances = append_bias_vector(instances,bias)
-	weights, message = pcptron.train(instances,targets, 0.1,100, stop_after_convergence=True)
+	weights, message = pcptron.train(instances,targets)
 	targetweights = read_target_weight(weightsfilename)
 	error = sse(weights, targetweights)
 	print(error)

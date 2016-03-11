@@ -24,6 +24,7 @@ class naivebayes:
     def getlikelihoods(self,instance, label = None):
 
         features = instance.copy()
+        #print(print(label))
         #global __classcounts__
         #global __conditionalfeaturecounts__
 
@@ -35,6 +36,7 @@ class naivebayes:
 
                 feature = "x{}={}".format(j,feature)
                 condition = feature + " | " + "y={}".format(label)
+                #print(condition)
                 #multiply partial likelihood for each label with likelihood of feature for the label
                 likelihoods[label] *= self.__conditionalfeaturecounts__[condition]/self.__classcounts__[label]
                 #print("likelihood for ", label, likelihoods[label])
@@ -67,8 +69,10 @@ class naivebayes:
             return
         i = 0
         #count the features given target by iterating through each instance
+        #print(targets)
         for instance in instances:
             features = instance.copy()
+            #print(features)
             j = 1
             #update class frequency table with the counts of each class
             updatefrequency(self.__classcounts__,targets[i])

@@ -5,7 +5,7 @@ __author__ = 'Dipesh Gautam' \
 from algorithms.naivebayes import *
 
 from myutils.csvtrainingdatareader import read_training_data
-#from myutils.nfolddatasplitter import *
+from myutils.nfoldcrossvalidator import *
 from algorithms.naivebayes import *
 def main():
 
@@ -27,7 +27,10 @@ def main():
 
     trainingfilename = "hw2-data/naivebayes.csv"
     #read the instances and target output from training file
+
     instances,targets = read_training_data(trainingfilename)
-    print(targets)
+    #print(targets)
+    do_nfolds_cross_validations(nbayes,10,instances,targets)
+    #print(targets)
 
 if __name__ == "__main__":main()
