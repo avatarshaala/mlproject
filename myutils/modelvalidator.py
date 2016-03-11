@@ -4,7 +4,29 @@ __author__ = 'Dipesh Gautam' \
 '''---------------------------------------------------'''
 
 from random import shuffle
-from algorithms.naivebayes import *
+
+
+'''Confusiion matrix is a dictionary with key as classification output and value as number of times that output obtained
+For examle, if car is classified as car 100 times then the confusion matrix entry will be 'car:car' : 100
+'''
+def validate(confusionmatrix,model,traininstances, traintargets, testinstances, testtargets):
+
+    model.train(traininstances,traintargets)
+    #test each test instance
+    for i in range(len(testinstances)):
+        output = model.test(testinstances[i])
+
+        if type(output) != type(1) and type(output) != type(1.2):#if output is not integer or float (i.e output is tuple or array)
+            output = output[0]
+        #create confusion matrix
+        key = "{}:{}".format(testtargets[i],output)
+        if key in confusionmatrix:
+            confusionmatrix[key] +=1
+        else:
+            confusionmatrix[key] = 1
+
+
+
 '''current implementation of cross validation only handles categorical outputS'''
 def do_nfolds_cross_validations(model, folds, instances,targets):
 
@@ -14,7 +36,10 @@ def do_nfolds_cross_validations(model, folds, instances,targets):
     foldslist = get_fold_indices(len(instances), folds, shuffled=True)
 
     confusionmatrix = {}
+    j = 1
     for fold in foldslist:
+        print("Working on fold: {}".format(j))
+        j+=1
         testindices = fold[0]
         trainindices = fold[1]
 
@@ -24,21 +49,10 @@ def do_nfolds_cross_validations(model, folds, instances,targets):
         testinstances = [instances[i] for i in testindices]
         testtargets = [targets[i] for i in testindices]
 
-        model.train(traininstances,traintargets)
-        #test each test instance
-        for i in range(len(testinstances)):
-            output = model.test(testinstances[i])
 
-            if type(output) != type(1) and type(output) != type(1.2):#if output is not integer or float (i.e output is tuple or array)
-                output = output[0]
-            #create confusion matrix
-            key = "{}:{}".format(testtargets[i],output)
-            if key in confusionmatrix:
-                confusionmatrix[key] +=1
-            else:
-                confusionmatrix[key] = 1
+        validate(confusionmatrix, model,traininstances,traintargets, testinstances, testtargets)
 
-    print(confusionmatrix)
+    #print(confusionmatrix)
     return confusionmatrix
 
 
