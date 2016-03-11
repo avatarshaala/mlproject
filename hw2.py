@@ -5,7 +5,8 @@ __author__ = 'Dipesh Gautam' \
 from algorithms.naivebayes import *
 
 from myutils.csvtrainingdatareader import read_training_data
-#from myutils.perceptroninputformatter import append_bias_vector
+#from myutils.nfolddatasplitter import *
+from algorithms.naivebayes import *
 def main():
 
     instances = [
@@ -16,9 +17,11 @@ def main():
                     [0,0,0]
                  ]
     targets = [1,0,0,0,1]
-    traininginstancescount, classcounts, conditionalfeaturecounts = train(instances,targets)
 
-    maxlabel, posterior =  test([1,1,0])
+    nbayes = naivebayes()
+    traininginstancescount, classcounts, conditionalfeaturecounts = nbayes.train(instances,targets)
+
+    maxlabel, posterior =  nbayes.test([1,1,0])
     print( maxlabel, posterior)
 
 

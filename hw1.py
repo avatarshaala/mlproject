@@ -1,3 +1,4 @@
+from functions.errorfunctions import sse
 from myutils.csvtrainingdatareader import read_training_data, read_target_weight
 from myutils.perceptroninputformatter import append_bias_vector
 from algorithms.perceptron import *
@@ -20,11 +21,13 @@ def main():
 	instances = [[float(x) for x in instance] for instance in instances]
 	#convert targets to float
 	targets = [float(x) for x in targets]
+
+	pcptron = perceptron()
 	#generate bias vector
-	bias = generate_bias_vector(len(instances))
+	bias = pcptron.generate_bias_vector(len(instances))
 	#append biase term to each of the instances, hence dimension of an instance increase by 1
 	instances = append_bias_vector(instances,bias)
-	weights, message = train(instances,targets, 0.1,100, stop_after_convergence=True)
+	weights, message = pcptron.train(instances,targets, 0.1,100, stop_after_convergence=True)
 	targetweights = read_target_weight(weightsfilename)
 	error = sse(weights, targetweights)
 	print(error)

@@ -4,6 +4,26 @@ __author__ = 'Dipesh Gautam' \
 '''---------------------------------------------------'''
 
 from random import shuffle
+from algorithms.naivebayes import *
+def do_nfolds_cross_validations(folds, model, instances,targets):
+
+    if len(instances) != len(targets):
+        print("Error: Number of instances should be equal to number of targets")
+        return
+    foldslist = get_fold_indices(len(instances), folds, shuffled=True)
+
+    for fold in foldslist:
+        testindices = fold[0]
+        trainindices = fold[1]
+
+        traininstances = [instances[i] for i in trainindices]
+        traintargets = [targets[i] for i in trainindices]
+
+        testinstances = [instances[i] for i in testindices]
+        testtargets = [targets[i] for i in testindices]
+
+        model.train(traininstances,traintargets)
+
 
 '''
  56 data points
@@ -30,27 +50,36 @@ def get_fold_indices(datalength, numoffolds, shuffled=False):
     allindices = [i for i in range(0,datalength)]
     if shuffled:
         shuffle(allindices)
-    validationlist = []
+    foldslist = []
     foldlength = int(datalength / numoffolds)
     #each fold gets one more data point until residue is zero
     residue = datalength % numoffolds
-
+    testmax = -1
+    testmin = 0
     for i in range(0, numoffolds):
         share = 0
         if residue > 0:
             share = 1
             residue -= 1
-        testmin = i * (foldlength + share)
-        testmax = testmin + (foldlength + share) - 1
+        #testmin = i * (foldlength + share)
+        #testmax = testmin + (foldlength + share) - 1
+        testmin = testmax + 1
+        testmax = testmin + (foldlength + share)-1
         testindices = [allindices[j] for j in range(testmin,testmax + 1)]
         trainindices = sorted(list(set(allindices)-set(testindices)))
-        validationlist.append((testindices,trainindices))
+        foldslist.append((testindices,trainindices))
 
-    return validationlist
+    return foldslist
 
 '''
 #test code below
-lst = get_fold_indices(56, 10, shuffled = True)
 
+lst = get_fold_indices(56, 10, shuffled = True)
 print(lst[3])
+
+print("\n\n")
+for i in range(len(lst)):
+    print("{}: {}".format(i,lst[i]))
+
 '''
+
