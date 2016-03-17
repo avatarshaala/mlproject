@@ -32,14 +32,17 @@ The smoothing is done by Laplace( add one) smoothing (n = 1)
 
  n = 1 for add one smoothing
 '''
+
+from math import log
 class naivebayes:
 
-    def __init__(self, smoothed=True):
+    def __init__(self, loglikelihood = False, smoothed=True):
         self.__Counts_c__ = {}
         self.__Count_xc__ = {}#count of cooccurance of a feature and a class. x represents feature and c represents class
         self.__traininginstancescount__ = 0 # count of training data
         self.__smoothed__ = smoothed
         self.__featuresranges__ = {} #possible values each feature con take for example: x1 = {0,1}, x2 = {1,0}, x3= {0,1,2} etc
+        self.loglikelihood = loglikelihood
 
 
     def setfeaturesranges(self, feature, value):
@@ -82,7 +85,11 @@ class naivebayes:
                 if condition in self.__Count_xc__:
                     jointcount = self.__Count_xc__[condition]
 
-                likelihoods[label] *= (jointcount + n)/(self.__Counts_c__[label] + n * len(self.__featuresranges__["x{}".format(j)]))
+                partial = (jointcount + n)/(self.__Counts_c__[label] + n * len(self.__featuresranges__["x{}".format(j)]))
+                if self.loglikelihood:
+                    likelihoods[label] += log(partial,2)
+                else:
+                    likelihoods[label] *= partial
                 #print("likelihood for ", label, likelihoods[label])
                 j += 1
 
@@ -93,8 +100,11 @@ class naivebayes:
             likelihood(label,features, likelihoods)
             return likelihoods
 
-        #initialize likelihood for each class to 1
-        likelihoods =  {label: 1 for label, count in self.__Counts_c__.items()}
+        '''initialize likelihood for each class to initial value'''
+        init = 1
+        if self.loglikelihood:
+            init = 0
+        likelihoods =  {label: init for label, count in self.__Counts_c__.items()}
         #do for each label
         for label, count in self.__Counts_c__.items():
             likelihood(label,features,likelihoods)
@@ -141,7 +151,14 @@ class naivebayes:
         n = self.__traininginstancescount__
         priors.update((x,y/n) for x, y in priors.items())
         posteriors = self.getlikelihoods(instance)
-        posteriors.update((x,priors[x] * y) for x, y in posteriors.items())
+        '''use priors'''
+        '''
+        if self.loglikelihood:
+            posteriors.update((x,log(priors[x],2) + y) for x, y in posteriors.items())
+        else:
+            posteriors.update((x,priors[x] * y) for x, y in posteriors.items())
+        '''
+        '''--------'''
         maxlabel = max(posteriors, key=lambda i: posteriors[i])
 
         return maxlabel, posteriors[maxlabel]
