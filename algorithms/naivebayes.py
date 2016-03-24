@@ -45,6 +45,9 @@ class naivebayes:
         self.loglikelihood = loglikelihood
 
 
+    def reset(self):
+        pass
+
     def setfeaturesranges(self, feature, value):
         if feature not in self.__featuresranges__:
             self.__featuresranges__[feature] = {value}

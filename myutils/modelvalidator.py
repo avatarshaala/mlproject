@@ -11,6 +11,7 @@ For examle, if car is classified as car 100 times then the confusion matrix entr
 '''
 def validate(confusionmatrix,model,traininstances, traintargets, testinstances, testtargets):
 
+    model.reset()
     model.train(traininstances,traintargets)
     #test each test instance
     for i in range(len(testinstances)):

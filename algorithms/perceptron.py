@@ -14,6 +14,14 @@ class perceptron:
 		self.__iterations__ = iterations
 		self.__stop_after_convergence__ = stop_after_convergence
 
+		self.initialweights = initial_weights.copy()
+
+	def reset(self):
+		self.__weights__ = self.initialweights
+
+
+
+
 	def generate_bias_vector(self,n):
 		return [1]*n
 
