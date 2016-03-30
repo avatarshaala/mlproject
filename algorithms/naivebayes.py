@@ -132,7 +132,7 @@ class naivebayes:
             #print(features)
             j = 1
             #update class frequency table with the counts of each class
-            updatefrequency(self.__Counts_c__, targets[i])
+            increment_freq(self.__Counts_c__, targets[i])
 
             #update counts of each feature given target (key is x1=some value | y = some value)
             for featurevalue in features:
@@ -141,7 +141,7 @@ class naivebayes:
                 j += 1
                 condition = featurevalue + " | " + "y={}".format(targets[i])
                 #update the likelihood table with the condition counts of features
-                updatefrequency(self.__Count_xc__, condition)
+                increment_freq(self.__Count_xc__, condition)
             i += 1
 
         return self.__traininginstancescount__, self.__Counts_c__, self.__Count_xc__

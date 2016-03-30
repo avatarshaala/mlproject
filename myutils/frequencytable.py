@@ -1,7 +1,7 @@
 __author__ = 'Dipesh Gautam' \
              'email: dgautam@memphis.edu'
 '''---------------------------------------------------'''
-def updatefrequency(table, key):
+def increment_freq(table, key):
     if key in table:
         table[key] += 1
     else:
