@@ -42,7 +42,7 @@ class naivebayes:
         self.__traininginstancescount__ = 0 # count of training data
         self.__smoothed__ = smoothed
         self.__featuresranges__ = {} #possible values each feature con take for example: x1 = {0,1}, x2 = {1,0}, x3= {0,1,2} etc
-        self.loglikelihood = loglikelihood
+        self.loglikelihood = loglikelihood #flag to indicate whether to use loglikelihood of posterior to make decision
 
 
     def reset(self):
@@ -69,6 +69,7 @@ class naivebayes:
     def getlikelihoods(self,instance, label = None):
 
         features = instance.copy()
+        smoothingterm = sum([len(self.__featuresranges__[x]) for x in self.__featuresranges__])
         #print(print(label))
         '''define a local scope function to calculate likelihood of a given data instance with if given label'''
         def likelihood(label,features, likelihoods):
@@ -88,7 +89,8 @@ class naivebayes:
                 if condition in self.__Count_xc__:
                     jointcount = self.__Count_xc__[condition]
 
-                partial = (jointcount + n)/(self.__Counts_c__[label] + n * len(self.__featuresranges__["x{}".format(j)]))
+                #partial = (jointcount + n)/(self.__Counts_c__[label] + n * len(self.__featuresranges__["x{}".format(j)]))
+                partial = (jointcount + n)/(self.__Counts_c__[label] + n * smoothingterm)
                 if self.loglikelihood:
                     likelihoods[label] += log(partial,2)
                 else:
@@ -154,14 +156,14 @@ class naivebayes:
         n = self.__traininginstancescount__
         priors.update((x,y/n) for x, y in priors.items())
         posteriors = self.getlikelihoods(instance)
+
+
         '''use priors'''
-        '''
-        if self.loglikelihood:
+        if self.loglikelihood: #if loglikelihood is to use for decision
             posteriors.update((x,log(priors[x],2) + y) for x, y in posteriors.items())
-        else:
+        else: #if loglikelihood is not to use for decision
             posteriors.update((x,priors[x] * y) for x, y in posteriors.items())
-        '''
-        '''--------'''
+
         maxlabel = max(posteriors, key=lambda i: posteriors[i])
 
         return maxlabel, posteriors[maxlabel]
