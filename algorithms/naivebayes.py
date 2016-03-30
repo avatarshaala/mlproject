@@ -37,8 +37,8 @@ from math import log
 class naivebayes:
 
     def __init__(self, loglikelihood = False, smoothed=True):
-        self.__Counts_c__ = {}
-        self.__Count_xc__ = {}#count of cooccurance of a feature and a class. x represents feature and c represents class
+        self.__Counts_c__ = {} #dictionary that stores count of each class
+        self.__Count_xc__ = {}#dictionary that stores count of cooccurance of a feature and a class. x represents feature and c represents class
         self.__traininginstancescount__ = 0 # count of training data
         self.__smoothed__ = smoothed
         self.__featuresranges__ = {} #possible values each feature con take for example: x1 = {0,1}, x2 = {1,0}, x3= {0,1,2} etc

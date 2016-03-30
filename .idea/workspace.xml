@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d45bbe62-a48b-46f2-be57-05c862598df3" name="Default" comment="Naive Bayes an perceptron updated with code clieanups">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="d45bbe62-a48b-46f2-be57-05c862598df3" name="Default" comment="Refactored frequencytable.py">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/algorithms/naivebayes.py" afterPath="$PROJECT_DIR$/algorithms/naivebayes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myutils/frequencytable.py" afterPath="$PROJECT_DIR$/myutils/frequencytable.py" />
     </list>
     <list id="ff6f00c5-78de-418f-bbdd-f401a9ce226b" name="Failed commit: Default" comment="updated after naive bayes" />
     <ignored path="MLProject.iws" />
@@ -40,11 +38,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="naivebayes.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="naivebayes.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/algorithms/naivebayes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="150" column="0" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.461285">
+              <caret line="40" column="54" selection-start-line="40" selection-start-column="54" selection-end-line="40" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -112,10 +110,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="frequencytable.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="frequencytable.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myutils/frequencytable.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22405271">
+            <state vertical-scroll-proportion="0.0">
               <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
               <folding />
             </state>
@@ -150,8 +148,8 @@
         <option value="$PROJECT_DIR$/hw2.py" />
         <option value="$PROJECT_DIR$/algorithms/perceptron.py" />
         <option value="$PROJECT_DIR$/myutils/modelvalidator.py" />
-        <option value="$PROJECT_DIR$/algorithms/naivebayes.py" />
         <option value="$PROJECT_DIR$/myutils/frequencytable.py" />
+        <option value="$PROJECT_DIR$/algorithms/naivebayes.py" />
       </list>
     </option>
   </component>
@@ -667,7 +665,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459357054500</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Refactored frequencytable.py">
+      <created>1459357937405</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1459357937405</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -683,7 +687,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23279649" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23279649" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
@@ -743,7 +747,8 @@
     <MESSAGE value="Naive Bayes implemented" />
     <MESSAGE value="Naive Bayes an perceptron updated with code clieanups" />
     <MESSAGE value="Naive Bayes changed with some comments and enabled some commented code that were disabled for debugging purpose" />
-    <option name="LAST_COMMIT_MESSAGE" value="Naive Bayes changed with some comments and enabled some commented code that were disabled for debugging purpose" />
+    <MESSAGE value="Refactored frequencytable.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored frequencytable.py" />
     <option name="CHANGE_BROWSER_SETTINGS">
       <map>
         <entry key="hg4idea">
@@ -1165,18 +1170,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/algorithms/naivebayes.py">
+    <entry file="file://$PROJECT_DIR$/myutils/frequencytable.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="150" column="0" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myutils/frequencytable.py">
+    <entry file="file://$PROJECT_DIR$/algorithms/naivebayes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22405271">
-          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.461285">
+          <caret line="40" column="54" selection-start-line="40" selection-start-column="54" selection-end-line="40" selection-end-column="54" />
           <folding />
         </state>
       </provider>
