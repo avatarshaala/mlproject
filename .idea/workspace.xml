@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d45bbe62-a48b-46f2-be57-05c862598df3" name="Default" comment="Markov chain started">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/algorithms/markovchain.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/myutils/mathutil/matrix.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ff6f00c5-78de-418f-bbdd-f401a9ce226b" name="Failed commit: Default" comment="updated after naive bayes" />
@@ -685,7 +687,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459464025781</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Markov chain started">
+      <created>1459464064475</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1459464064475</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView">
