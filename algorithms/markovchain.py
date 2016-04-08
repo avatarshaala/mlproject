@@ -71,6 +71,7 @@ class markovchain:
         return priors * self.n_transition_matrix(n)
 
 
+
 '''
 #test example below
 t = [[0.5, 0.25, 0.25],[0.5, 0, 0.5],[0.25,0.25, 0.5]]
