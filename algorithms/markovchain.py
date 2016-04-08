@@ -29,9 +29,8 @@ class markovchain:
         if not isprobability:
             #Build transition probability
             for i in range(row):
-                self.transitionmatrix[i]/= numpy.sum(self.transitionmatrix[i])
-
-            #print("Build transition probability")
+                sum_ = numpy.sum(self.transitionmatrix[i])
+                self.transitionmatrix[i] /= float(sum_)
 
     #n = number of transitions
     def n_transition_matrix(self, n):
@@ -47,13 +46,26 @@ class markovchain:
             return self.buff[buflen-1] * (self.transitionmatrix ** (n-buflen))
 
         #else return last element of buffer
-        return self.buff[n-1]
+        return self.buff[n-1].copy()
+
+    def n_convergence_matrix(self):
+        prev_matrix = None
+        transition_count = 1
+        current_matrix = self.n_transition_matrix(transition_count)
+        while not numpy.array_equal(prev_matrix,current_matrix):
+            prev_matrix = current_matrix.copy()
+            transition_count += 1
+            current_matrix = self.n_transition_matrix(transition_count)
+
+        return transition_count-1, current_matrix
+
+
 
     #the source and destination could be the indices or the name of the states
     def n_transitionprobability(self, source, destination, n):
         i = self.states[source]
         j = self.states[destination]
-        return self.n_transition_matrix(n)[i,j]
+        return self.n_transition_matrix(n)[i,j].copy()
 
     def n_transition_probability_vector(self, priors, n):
         return priors * self.n_transition_matrix(n)
@@ -65,10 +77,14 @@ t = [[0.5, 0.25, 0.25],[0.5, 0, 0.5],[0.25,0.25, 0.5]]
 
 mchain = markovchain(t, states=["rain","nice","snow"],isprobability=True)
 
+cnt, tmat = mchain.n_convergence_matrix()
+print(cnt, "\n", tmat)
+
 x = mchain.n_transition_matrix(100)
 print(x)
 
 
 p = mchain.n_transitionprobability("rain","nice",100)
 print(p)
+
 '''
