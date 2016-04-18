@@ -59,7 +59,9 @@ class markovchain:
 
         return transition_count-1, current_matrix
 
-
+    def n_convergence_probability_vector(self):
+        iterations, matrix = self.n_convergence_matrix()
+        return iterations, matrix[0]
 
     #the source and destination could be the indices or the name of the states
     def n_transitionprobability(self, source, destination, n):
@@ -81,6 +83,12 @@ mchain = markovchain(t, states=["rain","nice","snow"],isprobability=True)
 cnt, tmat = mchain.n_convergence_matrix()
 print(cnt, "\n", tmat)
 
+cnt, vect = mchain.n_convergence_probability_vector()
+
+print("\n________________")
+print(cnt, "\n", vect)
+print("\n________________")
+
 x = mchain.n_transition_matrix(100)
 print(x)
 
@@ -89,3 +97,4 @@ p = mchain.n_transitionprobability("rain","nice",100)
 print(p)
 
 '''
+
