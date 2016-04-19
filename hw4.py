@@ -12,7 +12,7 @@ def compress_file(infilename, outputfilename, k):
 
     kmean = kmeans(instances,k)
     centroids, clusters = kmean.get_clusters()
-    print(centroids)
+    #print(centroids)
     outfile = open(outputfilename, "w")
 
     for instance in instances:
