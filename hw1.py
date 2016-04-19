@@ -1,5 +1,5 @@
 from functions.errorfunctions import sse
-from myutils.csvtrainingdatareader import read_training_data, read_target_weight
+from myutils.csvfilereader import read_training_data, read_target_weight
 from myutils.perceptroninputformatter import append_bias_vector
 from algorithms.perceptron import *
 

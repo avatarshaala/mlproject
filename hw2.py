@@ -4,7 +4,7 @@ __author__ = 'Dipesh Gautam' \
 '''---------------------------------------------------'''
 from algorithms.naivebayes import *
 
-from myutils.csvtrainingdatareader import read_training_data
+from myutils.csvfilereader import read_training_data
 from myutils.modelvalidator import *
 from algorithms.naivebayes import *
 def main():
