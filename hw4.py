@@ -30,21 +30,29 @@ def compress_file(infilename, outputfilename, k):
 directory = "hw4-data/"
 filename = "koala.txt"
 k = 2
+print("koala k2")
 compress_file(directory + filename, directory + str(k)+"_"+filename, k)
 k = 5
+print("koala k5")
 compress_file(directory + filename, directory + str(k)+"_"+filename, k)
 k = 10
+print("koala k10")
 compress_file(directory + filename, directory + str(k)+"_"+filename, k)
 k = 20
+print("koala k20")
 compress_file(directory + filename, directory + str(k)+"_"+filename, k)
 
 filename = "penguins.txt"
 k = 2
+print("penguins k2")
 compress_file(directory + filename, directory + str(k)+"_"+filename, k)
 k = 5
+print("penguins k5")
 compress_file(directory + filename, directory + str(k)+"_"+filename, k)
 k = 10
+print("penguins k10")
 compress_file(directory + filename, directory + str(k)+"_"+filename, k)
 k = 20
+print("penguins k20")
 compress_file(directory + filename, directory + str(k)+"_"+filename, k)
 

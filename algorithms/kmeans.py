@@ -15,10 +15,14 @@ class kmeans:
     def __init__(self, data, k):
         self.data = np.array(data)
         self.k = k
+        print("value of k:",self.k)
 
-    def get_clusters(self,centroids = []):
-        #centroids = []
+    def get_clusters(self,centroids = None):
+        if(centroids == None):
+            centroids = []
+        # print("CTR: ", len(centroids))
 
+        #if nothing is initialized as centroid
         if len(centroids)== 0:
             centroids = self.randomize_centroids(centroids)
 
@@ -41,11 +45,12 @@ class kmeans:
             final_clusters = []
             for cluster in clusters:
                 final_clusters.append(np.array(cluster).tolist())
+                print("old centroid size: {} centroids size: {}, {}".format(len(old_centroids), len(centroids),index))
                 old_centroids[index] = centroids[index]
                 centroids[index] = np.mean(cluster, axis=0).tolist()
                 index += 1
 
-
+            print("iterations: ", iterations)
         '''
         print("The total number of data instances is: " + str(len(self.data)))
         print("The total number of iterations necessary is: " + str(iterations))
@@ -94,7 +99,7 @@ class kmeans:
 
     # check if clusters have converged
     def has_converged(self, centroids, old_centroids, iterations):
-        MAX_ITERATIONS = 100
+        MAX_ITERATIONS = 10
         if iterations > MAX_ITERATIONS:
             return True
         return old_centroids == centroids
