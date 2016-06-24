@@ -11,8 +11,10 @@ class markovchain:
      states = list of string names of states
     isprobability = a boolean to indicate if elementarray is probability array
     """
-    def __init__(self, elemarray, states=[],isprobability=True):
+    def __init__(self, elemarray, states=None,isprobability=True):
 
+        if states == None:
+            states = []
         #create enumeration of states
         self.states = {}
         if len(states) == 0:

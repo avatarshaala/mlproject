@@ -8,7 +8,10 @@ __author__ = 'Dipesh Gautam' \
 #return pow(sse/n,0.5)
 import random
 class perceptron:
-	def __init__(self, learning_rate, iterations, initial_weights=[], stop_after_convergence=True):
+	def __init__(self, learning_rate, iterations, initial_weights=None, stop_after_convergence=True):
+
+		if initial_weights == None:
+			initial_weights = []
 		self.__weights__ = initial_weights
 		self.__alpha__ = learning_rate
 		self.__iterations__ = iterations
