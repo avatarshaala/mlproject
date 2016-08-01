@@ -65,10 +65,58 @@ class Matrix:
             printstr += "\n"
         print(printstr)
 
+    '''case for empty matrix is omitted'''
+    def isSymmetric(self):
+        #if matrix is not a square matrix return false
+        if len(self.elem_lst[0]) != len(self.elem_lst):
+            return False
+
+        for i in range(len(self.elem_lst)):
+            for j in range(len(self.elem_lst[i])):
+                if self.elem_lst[i][j] != self.elem_lst[j][i]:
+                    return False
+
+        return True
+
 
 '''
 a = Matrix([[2,3,1],[7,4,6]])
 b = Matrix([[6,8,3],[5,2,4]])
 c = a + b
-c.print()
+'''
+'''
+[2,3,1]
+[3,8,5]
+[1,5,7]]
+'''
+'''
+a = Matrix(
+    [
+        [2,3,1],
+        [3,8,5],
+        [1,5,7]
+    ]
+    )
+
+a = Matrix(
+    [
+        [9, 13, 5, 2],
+        [1, 11, 7, 6],
+        [3, 7, 4, 1],
+        [6, 0, 7, 10]
+    ]
+    )
+
+a = Matrix(
+    [
+        [9, 13, 3, 6],
+        [13, 11, 7, 6],
+        [3, 7, 4, 7],
+        [6, 6, 7, 10]
+    ]
+    )
+
+
+print(a.isSymmetric())
+
 '''
