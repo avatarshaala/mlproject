@@ -2,7 +2,7 @@ __author__ = 'Dipesh Gautam' \
              'email: dgautam@memphis.edu'
 '''---------------------------------------------------'''
 
-import numpy
+import numpy as np
 
 class markovchain:
     """
@@ -25,13 +25,17 @@ class markovchain:
         self.BUFF_SIZE = 100
         self.buff = [] #buffer to store n steps transition matrices
 
-        self.transitionmatrix = numpy.matrix(elemarray)
+        if type(elemarray) is np.ndarray:
+            self.transitionmatrix = elemarray
+        else:
+            self.transitionmatrix = np.matrix(elemarray)
+        # print(self.transitionmatrix)
         self.buff.append(self.transitionmatrix)
-        row,col = numpy.shape(self.transitionmatrix)
+        row,col = np.shape(self.transitionmatrix)
         if not isprobability:
             #Build transition probability
             for i in range(row):
-                sum_ = numpy.sum(self.transitionmatrix[i])
+                sum_ = np.sum(self.transitionmatrix[i])
                 self.transitionmatrix[i] /= float(sum_)
 
     #n = number of transitions
@@ -54,7 +58,7 @@ class markovchain:
         prev_matrix = None
         transition_count = 1
         current_matrix = self.n_transition_matrix(transition_count)
-        while not numpy.array_equal(prev_matrix,current_matrix):
+        while not np.array_equal(prev_matrix,current_matrix):
             prev_matrix = current_matrix.copy()
             transition_count += 1
             current_matrix = self.n_transition_matrix(transition_count)
