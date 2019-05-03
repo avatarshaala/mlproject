@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list id="ff6f00c5-78de-418f-bbdd-f401a9ce226b" name="Failed commit: Default" comment="updated after naive bayes" />
     <list default="true" readonly="true" id="d45bbe62-a48b-46f2-be57-05c862598df3" name="Default" comment="Markov chain class implemented">
-      <change beforePath="" afterPath="$PROJECT_DIR$/algorithms/mlp2.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/algorithms/mlp3.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/algorithms/mlp_demo.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/diagram.jpg" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/algorithms/mlp.py" afterPath="$PROJECT_DIR$/algorithms/mlp.py" />
-      <change beforePath="$PROJECT_DIR$/algorithms/mlp1.py" afterPath="" />
       <change beforePath="F:/Drive F/Research/AutoAssessmentProject/wesanalysis/adjency_runner.py" afterPath="F:/Drive F/Research/AutoAssessmentProject/wesanalysis/adjency_runner.py" />
     </list>
     <ignored path="MLProject.iws" />
@@ -110,8 +103,8 @@
       <file leaf-file-name="mlp3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/algorithms/mlp3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2227">
-              <caret line="161" column="35" lean-forward="false" selection-start-line="161" selection-start-column="21" selection-end-line="161" selection-end-column="35" />
+            <state relative-caret-position="255">
+              <caret line="45" column="34" lean-forward="true" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -904,7 +897,14 @@
       <option name="project" value="LOCAL" />
       <updated>1485926734816</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="several MLP implemented">
+      <created>1556906060162</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1556906060162</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -930,7 +930,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7210811" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2573455" sideWeight="0.49791667" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5086614" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25053304" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25053304" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1337953" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1027,7 +1027,8 @@
     <MESSAGE value="K-Means default parameter of get_clusters() with empty list changed to  default parameter  with None" />
     <MESSAGE value="Lists as default parameter issue resolved (list is changed to None and assigned to empty list [] if None in function body)" />
     <MESSAGE value="Markov chain class implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Markov chain class implemented" />
+    <MESSAGE value="several MLP implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="several MLP implemented" />
     <option name="CHANGE_BROWSER_SETTINGS">
       <map>
         <entry key="hg4idea">
@@ -1476,8 +1477,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/algorithms/mlp3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2227">
-          <caret line="161" column="35" lean-forward="false" selection-start-line="161" selection-start-column="21" selection-end-line="161" selection-end-column="35" />
+        <state relative-caret-position="255">
+          <caret line="45" column="34" lean-forward="true" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
