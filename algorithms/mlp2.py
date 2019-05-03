@@ -31,10 +31,12 @@ class mlp1:
             self.layers.append(layer)
 
 
-    def activation(self,input,activation_type='SIG'):
+    def activation(self,input,function='SIG'):
 
-        if activation_type == 'SIG':
+        if function == 'SIG':
             return 1 / (1 + np.exp(-input))
+        elif function == 'TANH':
+            return np.tanh(input)
 
     def activate(self,input):
 
@@ -52,15 +54,25 @@ class mlp1:
                 net = ip + b
                 # print(net)
 
-                self.layers[i]['activations'] = self.activation(net)
+                self.layers[i]['activations'] = self.activation(net,function='SIG')
 
         #update the outputs of network with calculated outputs above after activations of each layers
         self.outputs = self.layers[len(self.layers) - 1]['activations']
 
-    def derivative(self,x, function='SIG'):
+    def activation_derivative(self, x, function='SIG'):
         if function == 'SIG':
             output = 1/(1 + np.exp(-x))
             return output*(1-output)
+        elif function == 'TANH':
+            return (1-(np.tanh(x))**2) #derivative of tanh(X) = 1- tanh^2(x)
+
+    def cost_derivative(self,output, target, function='SSE'):
+        if function == 'SSE':
+            return target - output
+        elif function == "CROSS_ENTROPY":
+            return (output - target)/(output - output**2)
+
+
 
     def back_propagate(self,target):
         # backward pass from output layer all the way to first hidden layer omitting input layer;
@@ -70,11 +82,12 @@ class mlp1:
             layer = self.layers[i]
 
             layer_ip = layer['weights'].dot(self.layers[i-1]['activations']) + layer['biases'] #net of each neuron in a layer
-            f_prime = self.derivative(layer_ip, function="SIG")
+            f_prime = self.activation_derivative(layer_ip, function="SIG")#derivative of activation function
 
             if i == len(self.layers) - 1:#for output layer
-                operr = target - layer['activations']
-                layer['deltas'] = (operr) * f_prime
+                # operr = target - layer['activations']
+                cost_prime = self.cost_derivative(layer['activations'],target, function='SSE')#target - layer['activations'] in case of SSE
+                layer['deltas'] = cost_prime * f_prime
 
             else: #other layers
                 layer['deltas'] = (self.layers[i + 1]['weights'].T).dot( self.layers[i + 1]['deltas']) * f_prime
@@ -145,36 +158,36 @@ class mlp1:
 
 #====================== following are the codes to verify the correctness of implementation ========================
 def do_unit_test():
+
     '''
-        values produced should be as follows
-        [layer 1:
-            [ 0.2000195  -0.09995451]
-            [ 0.29996771 -0.30007534]
-        biases:
-            [ 0.10006499 -0.20010763]
-        activations:
-            [ 0.52248482  0.42067575]
-        ]
-        [layer 2:
-            [-0.20019727 -0.30015883]
-            [-0.10096643  0.29922188]
-        biases:
-            [ 0.09962244  0.19815031]
-        activations:
-            [ 0.46737151  0.56806341]
-        ]
-        [layer 3:
-            [-0.10546661  0.29335565]
-            [-0.19372243 -0.29236997]
-        biases:
-            [ 0.18830351  0.11343165]
+    values produced should be as follows
+    [layer 1:
+        [ 0.2000195  -0.09995451]
+        [ 0.29996771 -0.30007534]
+    biases:
+        [ 0.10006499 -0.20010763]
+    activations:
+        [ 0.52248482  0.42067575]
+    ]
+    [layer 2:
+        [-0.20019727 -0.30015883]
+        [-0.10096643  0.29922188]
+    biases:
+        [ 0.09962244  0.19815031]
+    activations:
+        [ 0.46737151  0.56806341]
+    ]
+    [layer 3:
+        [-0.10546661  0.29335565]
+        [-0.19372243 -0.29236997]
+    biases:
+        [ 0.18830351  0.11343165]
 
-        activations:
-            [ 0.58022129  0.45911814]
+    activations:
+        [ 0.58022129  0.45911814]
 
-        ]
-        '''
-
+    ]
+    '''
     weights = np.array([
         [
             [0.2, -0.1],
@@ -249,5 +262,5 @@ def training_example():
 
 if __name__ == "__main__":
     training_example()
-    #do_unit_test()
+    # do_unit_test()
 
